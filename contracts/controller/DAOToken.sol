@@ -31,7 +31,7 @@ contract DAOToken is MintableToken,Destructible,BurnableToken {
         return (_transfer(msg.sender, _to, _value));
     }
 
-    function transact(address _to, uint _value, bytes _data) public returns(bool) {
+    function transfer(address _to, uint _value, bytes _data) public returns(bool) {
         _transfer(msg.sender, _to, _value);
         if (isContract(_to)) {
             if (! TokenReceiver(_to).tokenFallback(msg.sender, _value, _data)) {
