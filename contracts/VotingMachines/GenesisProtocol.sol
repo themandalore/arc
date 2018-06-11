@@ -80,7 +80,7 @@ contract GenesisProtocol is IntVoteInterface,UniversalScheme {
         mapping(address=>Staker) stakers;
     }
 
-    event ExecuteProposal(bytes32 indexed _proposalId,
+    event GPExecuteProposal(bytes32 indexed _proposalId,
                           address indexed _avatar,
                           uint _decision,
                           uint _totalReputation,
@@ -436,7 +436,8 @@ contract GenesisProtocol is IntVoteInterface,UniversalScheme {
                 }
                 proposal.daoBountyRemain = daoBountyRemain;
             }
-            emit ExecuteProposal(_proposalId, proposal.avatar, proposal.winningVote, totalReputation, executionState);
+            emit ExecuteProposal(_proposalId, proposal.avatar, proposal.winningVote, totalReputation);
+            emit GPExecuteProposal(_proposalId, proposal.avatar, proposal.winningVote, totalReputation, executionState);
             (tmpProposal.executable).execute(_proposalId, tmpProposal.avatar, int(proposal.winningVote));
         }
         return (executionState != ExecutionState.None);
